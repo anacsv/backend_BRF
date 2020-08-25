@@ -1,11 +1,12 @@
+import uuid
 from django.db import models
 from django.contrib.postgres.search import SearchVectorField
-from django.utils import timezone
 
 
 class SellerOrders(models.Model):
-    created_at = models.DateTimeField(default=timezone.now)
-    updated_at = models.DateTimeField(default=timezone.now)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
     code = models.TextField(max_length=16)
     order_id = models.UUIDField()
     channel_slug = models.TextField(max_length=16)
